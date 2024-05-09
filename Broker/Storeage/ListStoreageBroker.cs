@@ -78,7 +78,14 @@ namespace ClothesShop.Broker.Storeage
 
         public Clothes GetClothes(int id)
         {
-            
+             foreach(Clothes clothesIteim in this.clothes)
+            {
+                if(clothesIteim.Id == id)
+                {
+                    return clothesIteim;
+                }
+            }
+            return new Clothes();
         }
 
         public void PurchaseClothes(string model)
