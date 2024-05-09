@@ -60,7 +60,15 @@ namespace ClothesShop.Broker.Storeage
 
         public bool DeleteClothes(int id)
         {
-            throw new NotImplementedException();
+            foreach (Clothes clothesIteim in this.clothes)
+            {
+                if (clothesIteim.Id == id)
+                {
+                    this.clothes.Remove(clothesIteim);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<Clothes> GetAllClothes()
@@ -70,7 +78,7 @@ namespace ClothesShop.Broker.Storeage
 
         public Clothes GetClothes(int id)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void PurchaseClothes(string model)
