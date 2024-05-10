@@ -48,14 +48,16 @@ namespace ClothesShop.Broker.Storeage
             });
         }
 
-        public void AddClothes(Clothes clothes)
+        public Clothes AddClothes(Clothes clothes)
         {
-            throw new NotImplementedException();
+            this.clothes.Add(clothes);
+            return clothes;
         }
 
-        public void AddRangeClothes(List<Clothes> clothes)
+        public List<Clothes> AddRangeClothes(List<Clothes> clothes)
         {
-            throw new NotImplementedException();
+            this.clothes.AddRange(clothes);
+            return clothes;
         }
 
         public bool DeleteClothes(int id)
