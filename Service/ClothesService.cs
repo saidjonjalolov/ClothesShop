@@ -20,7 +20,31 @@ namespace ClothesShop.Service
         }
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return id is 0
+           ? InvalidDeleteId()
+           : ValidationAndDelete(id);
+        }
+
+
+
+        private bool ValidationAndDelete(int id)
+        {
+            bool isDelete = this.listStoreageBroker.DeleteClothes(id);
+            if (isDelete is true)
+            {
+                this.loggingBroker.LogInformation("The information in the id has been deleted.");
+                return isDelete;
+            }
+            else
+            {
+                this.loggingBroker.LogError("Id is Not Found.");
+                return isDelete;
+            }
+        }
+        private bool InvalidDeleteId()
+        {
+            this.loggingBroker.LogError("The id information is invalid.");
+            return false;
         }
 
         public void InsertClothes(Clothes clothes)
