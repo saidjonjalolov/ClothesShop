@@ -18,35 +18,65 @@ namespace ClothesShop.Service
 
         public bool Delete(int id)
         {
-            return id is 0
-                ? InvalidDeleteId()
-                : ValidationAndDelete(id);
+            try
+            {
+                return id is 0
+                    ? InvalidDeleteId()
+                    : ValidationAndDelete(id);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return false;
+            }
         }
         public Clothes InsertClothes(Clothes clothes)
         {
-            return clothes is null
+            try
+            {
+                return clothes is null
                     ? InvalidInsertClothes()
                     : ValidationAndInsertClothes(clothes);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return new Clothes();
+            }
         }
 
         public List<Clothes> InsertRangeClothes(List<Clothes> clothes)
         {
-            return clothes is null
+            try
+            {
+                return clothes is null
                ? InvalidInsertRangeClothes()
                : ValidationAndInsertRangeClothes(clothes);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return new List<Clothes>();
+            }
         }
         public void Purchase(string model)
         {
-            if (model is null)
+            try
             {
-                InvalidPurchase();
+                if (model is null)
+                {
+                    InvalidPurchase();
+                }
+                else
+                {
+                    ValidationAndPurchase(model);
+                }
             }
-            else
+            catch (Exception exception)
             {
-                ValidationAndPurchase(model);
+                this.loggingBroker.LogError(exception);
             }
         }
-
         public List<Clothes> ReadAllClothes()
         {
             var clothes = this.listStoreageBroker.GetAllClothes();
@@ -69,9 +99,17 @@ namespace ClothesShop.Service
 
         public Clothes ReadClothes(int id)
         {
-            return id is 0
-               ? InvalidReadClothesId()
-               : ValidationAndReadClothes(id);
+            try
+            {
+                return id is 0
+                    ? InvalidReadClothesId()
+                    : ValidationAndReadClothes(id);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return new Clothes();
+            }
         }
 
         public List<SoldProducts> SoldInformation()
@@ -93,9 +131,17 @@ namespace ClothesShop.Service
 
         public Clothes Update(int id, Clothes clothes)
         {
-             return id is 0
+            try
+            {
+                return id is 0
              ? InvalidUpdateClothes()
              : ValidationAndUpdateClothes(id, clothes);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return new Clothes();
+            }
         }
 
         private Clothes ValidationAndUpdateClothes(int id, Clothes clothes)
