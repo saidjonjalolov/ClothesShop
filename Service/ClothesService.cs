@@ -92,7 +92,40 @@ namespace ClothesShop.Service
 
         public Clothes Update(int id, Clothes clothes)
         {
-            this.loggingBroker.LogError("The sale did not go through.");
+             return id is 0
+             ? InvalidUpdateClothes()
+             : ValidationAndUpdateClothes(id, clothes);
+        }
+
+        private Clothes ValidationAndUpdateClothes(int id, Clothes clothes)
+        {
+            if (clothes.Id is 0
+               || String.IsNullOrWhiteSpace(clothes.Model)
+               || String.IsNullOrWhiteSpace(clothes.Type.ToString()))
+            {
+                this.loggingBroker.LogError("Clothes information is incomplete.");
+                return clothes;
+            }
+            else
+            {
+                var isUpdate = this.listStoreageBroker.UpdateClothes(id, clothes);
+                if (isUpdate is not null)
+                {
+                    this.loggingBroker.LogInformation("Update.");
+                    return isUpdate;
+                }
+                else
+                {
+                    this.loggingBroker.LogError("No Update.");
+                    return clothes;
+                }
+            }
+        }
+
+        private Clothes InvalidUpdateClothes()
+        {
+            this.loggingBroker.LogError("Clothes information is incomplete.");
+            return new Clothes();
         }
 
         private void ValidationAndPurchase(string model)
