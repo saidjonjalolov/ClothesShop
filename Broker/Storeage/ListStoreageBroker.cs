@@ -1,9 +1,5 @@
 ﻿using ClothesShop.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ClothesShop.Broker.Storeage
 {
@@ -53,7 +49,8 @@ namespace ClothesShop.Broker.Storeage
             bool isThere = false;
             foreach (var clothesItem in this.clothes)
             {
-                if (clothesItem.Type.Equals(clothes.Type))
+                if (clothesItem.Type.ToString().ToLower().Equals(clothes.Type.ToString().ToLower())
+                            && clothesItem.Model.ToString().ToLower().Equals(clothes.Model.ToString().ToLower()))
                 {
                     clothesItem.Amount += clothes.Amount;
                     isThere = true;
@@ -69,18 +66,23 @@ namespace ClothesShop.Broker.Storeage
 
         public List<Clothes> AddRangeClothes(List<Clothes> clothes)
         {
+            bool isAddedClothesInfo = false;
             for (int iteration = 0; iteration < clothes.Count; iteration++)
             {
                 for (int itiration = 0; itiration < this.clothes.Count; itiration++)
                 {
-                    if (this.clothes[itiration].Type.Equals(clothes[iteration].Type))
+                    if (this.clothes[itiration].Type.ToString().ToLower().Equals(clothes[iteration].Type.ToString().ToLower())
+                         && this.clothes[itiration].Model.ToString().ToLower().Equals(clothes[iteration].Model.ToString().ToLower()))
                     {
+                        isAddedClothesInfo = true;
+
                         this.clothes[itiration].Amount += clothes[iteration].Amount;
                     }
-                    else
-                    {
-                        this.clothes.AddRange(clothes);
-                    }
+                }
+
+                if (isAddedClothesInfo is false)
+                {
+                    this.clothes.AddRange(clothes);
                 }
             }
             return clothes;
