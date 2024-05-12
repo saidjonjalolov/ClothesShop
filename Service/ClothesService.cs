@@ -75,12 +75,24 @@ namespace ClothesShop.Service
 
         public List<SoldProducts> SoldInformation()
         {
-            throw new NotImplementedException();
+            var clothes = this.listStoreageBroker.SoldInformationClothes();
+            foreach (var clothesItem in clothes)
+            {
+                if (clothesItem is not null)
+                {
+                    this.loggingBroker.LogInformation(
+                        $"Id {clothesItem.Id}\n" +
+                        $"Model {clothesItem.Model}\n" +
+                        $"Amount {clothesItem.Amount}\n" +
+                        $"Balance {clothesItem.Balance}");
+                }
+            }
+            return clothes;
         }
 
         public Clothes Update(int id, Clothes clothes)
         {
-            throw new NotImplementedException();
+            this.loggingBroker.LogError("The sale did not go through.");
         }
 
         private void ValidationAndPurchase(string model)
