@@ -70,10 +70,6 @@ If you enter clothing data into the function that is not in the database, it wil
 In this feature, you can sell clothes from your clothing store.
 ![Purchase Product](/Image/Purchase-Clothes.gif)
 
-### 7.2 About the error in the function.
-If you enter into the function a clothing reference that does not exist in the database of your clothing store, the function will return such an error.
-![Error Purchase Product](/Image/)
-
 ## 8.0 Sold Information Product
 ### 8.1 Information about the function.
 In this function, you can get information about the products sold in your store.
