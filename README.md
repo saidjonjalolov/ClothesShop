@@ -3,14 +3,14 @@ This project is written for a clothing store
 
 ## Menu
 ![Menu Image](/Image/Menu.png)
-## 1.0 Get clothes
-## 2.0 Get all clothes
-## 3.0 Add clothes
-## 4.0 Add range clothes
-## 5.0 Update one clothes
-## 6.0 Delete one clothes
-## 7.0 Purchase product
-## 8.0 Sold information clothes
+# 1.0 Get clothes
+# 2.0 Get all clothes
+# 3.0 Add clothes
+# 4.0 Add range clothes
+# 5.0 Update one clothes
+# 6.0 Delete one clothes
+# 7.0 Purchase product
+# 8.0 Sold information clothes
 
 ## 1.0 Get clothes
 ### 1.1 This function returns the data of a single garment in the database.
