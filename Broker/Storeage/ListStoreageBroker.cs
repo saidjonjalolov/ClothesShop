@@ -118,7 +118,17 @@ namespace ClothesShop.Broker.Storeage
 
         public List<Clothes> GetAllClothes()
         {
-            throw new NotImplementedException();
+            
+        public Clothes GetClothes(int id)
+        {
+            foreach(Clothes clothesIteim in this.clothes)
+            {
+                if(clothesIteim.Id == id)
+                {
+                    return clothesIteim;
+                }
+            }
+            return new Clothes();
         }
 
         public Clothes GetClothes(int id)
